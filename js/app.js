@@ -59,11 +59,14 @@ const loadCategoryNews = async (categoryId) => {
 //show news of specific categories
 const viewNews = (allNews) => {
     // console.log(data);
-
+    // let newsCount = 0;
+    const newsCount = allNews.length;
     const newsContainer = document.getElementById('news-container');
+    const newsCounterText = document.getElementById('newsCounter');
     newsContainer.innerHTML = '';
+    allNews.sort(function (a, b) { return b.total_view - a.total_view });
     allNews.forEach(news => {
-
+        // newsCount++;
         // console.log(news.title);
         // console.log(news.author.name);
         // console.log(news.author.published_date);
@@ -91,7 +94,7 @@ const viewNews = (allNews) => {
                             <div class="card-text d-flex justify-content-around">
                             <p class=""><img class="rounded-circle author-image" src="${news.author.img}" alt=""><small
                                 class="text-muted">${news.author.name ? news.author.name : 'Author Info not found'}, ${news.author.published_date ? news.author.published_date.slice(0, 10) : 'No publish date found'}</small></p>
-                            <p><i class="fa-regular fa-eye  pt-3 me-2"></i>${news.total_view}</p>
+                            <p><i class="fa-regular fa-eye  pt-3 me-2"></i>${news.total_view ? news.total_view : 'View Count not available'}</p>
                             <p><i class="fa-solid fa-star pt-3"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
                                 class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></p>
                             <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#newsModal" onclick="newsDetailsLoad('${news._id}')"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
@@ -101,7 +104,12 @@ const viewNews = (allNews) => {
         `;
         newsContainer.appendChild(cardDiv);
 
+        newsCounterText.classList.remove('d-none');
+
+
     })
+    newsCounterText.innerText = `${newsCount} Results Found`;
+    // newsCount = 0;
     toggleSpinner(false);
 }
 

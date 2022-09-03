@@ -20,8 +20,8 @@ const displayCategory = (data) => {
         const categoryList = document.getElementById('category-list');
         const categoryLink = document.createElement('div');
         // categoryLink.innerHTML = `${category.category_name}`;
-        categoryLink.innerHTML = `
-        <a class="text-decoration-none text-secondary" onclick="loadCategoryNews('${category.category_id}')" >${category.category_name}</a>
+        categoryLink.innerHTML = `<button type="button" class="btn btn-light my-2" onclick="loadCategoryNews('${category.category_id}')">
+        ${category.category_name}</button>
         `;
         categoryList.appendChild(categoryLink);
     })
@@ -53,7 +53,7 @@ const loadCategoryNews = async (categoryId) => {
         console.log(error);
     }
 }
-// loadCategoryNews('03');
+// loadCategoryNews('05');
 
 
 //show news of specific categories
@@ -63,16 +63,11 @@ const viewNews = (allNews) => {
     const newsCount = allNews.length;
     const newsContainer = document.getElementById('news-container');
     const newsCounterText = document.getElementById('newsCounter');
+    const firstMessage = document.getElementById('first-message');
+    firstMessage.classList.add('d-none');
     newsContainer.innerHTML = '';
     allNews.sort(function (a, b) { return b.total_view - a.total_view });
     allNews.forEach(news => {
-        // newsCount++;
-        // console.log(news.title);
-        // console.log(news.author.name);
-        // console.log(news.author.published_date);
-        // console.log(news.total_view);
-        // console.log(news.thumbnail_url);
-        // console.log(news.details.slice(0, 10));
         const cardDiv = document.createElement('div');
         cardDiv.classList.add('row');
         cardDiv.classList.add('my-2');
@@ -126,7 +121,7 @@ const newsDetailsLoad = async (id) => {
 }
 
 const showNewsDetails = (news) => {
-    console.log(news[0]);
+    // console.log(news[0]);
     const modalTitle = document.getElementById('newsModalLabel');
     modalTitle.innerText = `Title: ${news[0].title}`;
     const newsDetails = document.getElementById('news-details-body');

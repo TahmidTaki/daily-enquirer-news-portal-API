@@ -65,6 +65,9 @@ const viewNews = (allNews) => {
     const newsCounterText = document.getElementById('newsCounter');
     const firstMessage = document.getElementById('first-message');
     firstMessage.classList.add('d-none');
+    const sortBySection = document.getElementById('sort-by-section');
+    sortBySection.classList.remove('d-none');
+
     newsContainer.innerHTML = '';
     allNews.sort(function (a, b) { return b.total_view - a.total_view });
     allNews.forEach(news => {

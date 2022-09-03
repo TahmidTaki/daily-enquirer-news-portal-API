@@ -27,10 +27,21 @@ const displayCategory = (data) => {
     })
 }
 
+const toggleSpinner = isLoading => {
+    const loaderSection = document.getElementById('loader');
+    if (isLoading) {
+        loaderSection.classList.remove('d-none');
+    }
+    else {
+        loaderSection.classList.add('d-none');
+    }
+}
+
 
 
 //load news specific to category
 const loadCategoryNews = async (categoryId) => {
+    toggleSpinner(true);
     const url = `https://openapi.programming-hero.com/api/news/category/${categoryId}`;
     // console.log(url);
     try {
@@ -91,6 +102,7 @@ const viewNews = (allNews) => {
         newsContainer.appendChild(cardDiv);
 
     })
+    toggleSpinner(false);
 }
 
 const newsDetailsLoad = async (id) => {
@@ -112,7 +124,7 @@ const showNewsDetails = (news) => {
     const newsDetails = document.getElementById('news-details-body');
     newsDetails.innerHTML = `
     <p>Author: ${news[0].author.name ? news[0].author.name : 'Author Info not found'}, Published on: ${news[0].author.published_date ? news[0].author.published_date.slice(0, 10) : 'No publish date found'}, Total Views: ${news[0].total_view ? news[0].total_view : 'View Count not available'} </p>
-    <img class="img-fluid" src="${news[0].image_url}" alt="">
+    <img class="img-fluid" src="${news[0].image_url}" alt="News Image">
     <p>Full News:${news[0].details.slice(0, 1000)}...</p>
     `;
 }

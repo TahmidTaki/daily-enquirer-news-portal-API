@@ -25,24 +25,24 @@
                 <a class="navbar-brand" href="#"><span class="text-bg-primary px-2 py-1 rounded"> Daily
                     </span><span class="text-primary mx-1">Enquirer</span></a>
                 <div>
-                    <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
-                    </button> -->
-                    <!-- <div class="collapse navbar-collapse" id="navbarNav"> -->
-                    <div class="" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">News</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Blog</a>
-                            </li>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <div class="" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="#">News</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="blog.html">Blog</a>
+                                </li>
 
-                        </ul>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
         </nav>
         <!-- navbar ends -->
         <hr>
@@ -56,6 +56,18 @@
     </header>
 
     <main>
+        <!-- spinner -->
+        <section id="loader" class="d-none mb-5">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border text-warning" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </section>
+
+
+
+
         <!-- cards of news  -->
         <section class="pt-3 d-flex justify-content-center">
             <div id="news-container">

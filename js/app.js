@@ -90,7 +90,7 @@ const viewNews = (allNews) => {
                             <p class=""><img class="rounded-circle author-image" src="${news.author.img}" alt=""><small
                                 class="text-muted">${news.author.name ? news.author.name : 'Author Info not found'}, ${news.author.published_date ? news.author.published_date.slice(0, 10) : 'No publish date found'}</small></p>
                             <p><i class="fa-regular fa-eye  pt-3 me-2"></i>${news.total_view ? news.total_view : 'View Count not available'}</p>
-                            <p><i class="fa-solid fa-star pt-3"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            <p class="d-none d-md-block"><i class="fa-solid fa-star pt-3"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
                                 class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></p>
                             <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#newsModal" onclick="newsDetailsLoad('${news._id}')"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
                     </div>

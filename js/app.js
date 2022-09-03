@@ -75,14 +75,15 @@ const viewNews = (allNews) => {
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title pt-4">${news.title}</h5>
+                            
                             <p class="card-text">${news.details.slice(0, 500)}...</p>
                             <div class="card-text d-flex justify-content-around">
                             <p class=""><img class="rounded-circle author-image" src="${news.author.img}" alt=""><small
-                                class="text-muted">${news.author.name}, ${news.author.published_date.slice(0, 10)}</small></p>
+                                class="text-muted">${news.author.name ? news.author.name : 'Author Info not found'}, ${news.author.published_date ? news.author.published_date.slice(0, 10) : 'No publish date found'}</small></p>
                             <p><i class="fa-regular fa-eye  pt-3 me-2"></i>${news.total_view}</p>
                             <p><i class="fa-solid fa-star pt-3"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
                                 class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></p>
-                            <button class="btn btn-light"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                            <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#newsModal" onclick="newsDetailsLoad('${news._id}')"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
                     </div>
                         </div>
                     </div>
@@ -90,4 +91,28 @@ const viewNews = (allNews) => {
         newsContainer.appendChild(cardDiv);
 
     })
+}
+
+const newsDetailsLoad = async (id) => {
+    const url = `https://openapi.programming-hero.com/api/news/${id}`;
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        showNewsDetails(data.data);
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+const showNewsDetails = (news) => {
+    console.log(news[0]);
+    const modalTitle = document.getElementById('newsModalLabel');
+    modalTitle.innerText = `Title: ${news[0].title}`;
+    const newsDetails = document.getElementById('news-details-body');
+    newsDetails.innerHTML = `
+    <p>Author: ${news[0].author.name ? news[0].author.name : 'Author Info not found'}, Published on: ${news[0].author.published_date ? news[0].author.published_date.slice(0, 10) : 'No publish date found'}, Total Views: ${news[0].total_view ? news[0].total_view : 'View Count not available'} </p>
+    <img class="img-fluid" src="${news[0].image_url}" alt="">
+    <p>Full News:${news[0].details.slice(0, 1000)}...</p>
+    `;
 }
